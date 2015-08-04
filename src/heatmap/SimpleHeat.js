@@ -1,22 +1,23 @@
 "use strict";
 (function (root, factory) {
     if (typeof define === "function" && define.amd) {
-        define(["d3", "simpleheat", "../common/HTMLWidget", "require"], factory);
+        define(["d3", "simpleheat", "../common/HTMLWidget"], factory);
     } else {
-        root.other_Heat = factory(root.d3, root.simpleheat, root.common_HTMLWidget, root.require);
+        root.other_Heat = factory(root.d3, root.simpleheat, root.common_HTMLWidget);
     }
-}(this, function (d3, simpleheat, HTMLWidget, require) {
+}(this, function (d3, simpleheat, HTMLWidget) {
     function Heat() {
         HTMLWidget.call(this);
         this._tag = "canvas";
-        console.log("simpleheat: ", simpleheat);
     }
  
     Heat.prototype = Object.create(HTMLWidget.prototype);
     Heat.prototype._class += " other_Heat";
     Heat.prototype.publish("radius", 25, "number");
     Heat.prototype.publish("blur", 15, "number");
-    Heat.prototype.publish("image", "floor_plan_example.png", "string");
+    Heat.prototype.publish("image", null, "string");
+    Heat.prototype.publish("max", 1, "number");
+    Heat.prototype.publish("gradient", {}, "object");
  
     Heat.prototype.testData = function () {
         this
@@ -42,21 +43,21 @@
  
     Heat.prototype.enter = function (domNode, element) {
         HTMLWidget.prototype.enter.apply(this, arguments);
+        domNode.width = 500;
+        domNode.height = 474;
+
         this.heat = simpleheat(domNode);
         this.heat.data(this.data());
-        var context = domNode.getContext("2d");
 
         if(this.radius()){
             this.heat.radius(this.radius(), this.blur());
         }
 
         if(this.image()){
-            var base_image = new Image();
-            base_image.src = this.image();
-            base_image.onload = function(){
-                context.globalAlpha = .5;
-                context.drawImage(base_image, 0, 0, 100, 100);
-            }
+            var parent = domNode.parentElement;
+            var context = domNode.getContext("2d");
+            parent.style.backgroundImage = "url(" + this.image() + ")";
+            domNode.style.opacity = '.7';
         }
 
         this.heat.draw();

@@ -459,6 +459,7 @@
                         heat.radius(18);
                         heat.blur(10);
                         heat.image("heatmap/floor_plan_example.png");
+                        heat.gradient({.4});
                         heat.testData().render();
                     }
 
@@ -647,7 +648,8 @@
             <br style="clear:both" />
             Heat
             <br style="clear:both" />
-            <div id="heat" class="thumb"></div>
+            <div id="heat" style="width: 500px"></div>
+            <br style="clear:both" />
             Palette - Ordinal
             <br style="clear:both" />
             <div id="ordinal" class="thumb"></div>
