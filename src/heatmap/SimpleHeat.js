@@ -54,6 +54,7 @@
             var base_image = new Image();
             base_image.src = this.image();
             base_image.onload = function(){
+                context.globalAlpha = .5;
                 context.drawImage(base_image, 0, 0, 100, 100);
             }
         }
