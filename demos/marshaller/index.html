@@ -19,6 +19,7 @@
             var myUrl = new Comms.ESPUrl()
                 .url(document.URL)
             ;
+
             var newUrl = null;
             if (myUrl._params["Wuid"]) {
                 newUrl = new Comms.WsWorkunits()
@@ -47,8 +48,7 @@
                 marshaller = (myUrl._params["HTML"] ? new HTML() : new Graph())
                     .target("marshaller")
                     .ddlUrl(newUrl.constructUrl())
-                    .render()
-                ;
+                    .render();
             }
         });
         function doResize() {

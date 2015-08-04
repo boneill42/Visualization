@@ -22,12 +22,18 @@
         this._widgetObjsById = {};
     }
     var getThemes = function(idx){
-        g_defaultThemes(idx); // jshint ignore:line
-        return JSON.parse(localStorage.themeEditorThemes);
+        if (typeof g_defaultSerials == 'function') {
+            g_defaultThemes(idx); // jshint ignore:line
+            return JSON.parse(localStorage.themeEditorThemes);
+        }
+        return {};
     };
     var getSerials = function(idx){
-        g_defaultSerials(idx); // jshint ignore:line
-        return JSON.parse(localStorage.themeEditorSerials);
+        if (typeof g_defaultSerials == 'function') {
+            g_defaultSerials(idx); // jshint ignore:line
+            return JSON.parse(localStorage.themeEditorSerials);
+        }
+        return {};
     };
     var getThemeNames = function(idx){
         var loadedThemes = getThemes();
