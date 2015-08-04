@@ -25,6 +25,8 @@ require.config({
         "amcharts.xy": "../bower_components/amcharts/dist/amcharts/xy",
         "amcharts.plugins.responsive": "../bower_components/amcharts/dist/amcharts/plugins/responsive/responsive",
 
+        "simpleheat": "../node_modules/simpleheat/simpleheat",
+
         "src": "../src"
     },
     shim: {
@@ -69,6 +71,9 @@ require.config({
             init: function() {
                 AmCharts.isReady = true;
             }
+        },
+        "simpleheat": {
+            exports: "simpleheat"
         }
     }
 });

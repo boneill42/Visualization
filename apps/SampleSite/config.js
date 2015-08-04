@@ -24,6 +24,7 @@ require.config({
         "amcharts.serial": "bower_components/amcharts/dist/amcharts/serial",
         "amcharts.xy": "bower_components/amcharts/dist/amcharts/xy",
         "amcharts.plugins.responsive": "bower_components/amcharts/dist/amcharts/plugins/responsive/responsive",
+        "simpleheat": "node_modules/simpleheat/simpleheat",
 
         "src": "./src"
     },
@@ -68,6 +69,13 @@ require.config({
             exports: "AmCharts",
             init: function() {
                 AmCharts.isReady = true;
+            }
+        },
+        "simpleheat": {
+            deps: [],
+            exports: "simpleheat",
+            init: function() {
+                simpleheat.isReady = true;
             }
         }
     }

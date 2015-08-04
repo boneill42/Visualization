@@ -23,7 +23,8 @@
     "yargs": "^3.8.0",
     "jshint-stylish": "~1.0.2",
     "gulp-jshint": "~1.10.0",
-    "gulp-jscs": "~1.6.0"
+    "gulp-jscs": "~1.6.0",
+    "simpleheat": "0.2.0"
   },
   "repository": {
     "type": "git",
