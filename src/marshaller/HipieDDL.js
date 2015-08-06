@@ -101,6 +101,14 @@
     }
     ChartMappings.prototype = Object.create(SourceMappings.prototype);
 
+    function HeatMapMappings(visualization, mappings) {
+        SourceMappings.call(this, visualization, mappings);
+        this.columns = ["x", "y", "weight"];
+        this.columnsIdx = { x: 0, y:1, weight: 2 };
+        this.init();
+    }
+    HeatMapMappings.prototype = Object.create(SourceMappings.prototype);
+
     function ChoroMappings(visualization, mappings) {
         SourceMappings.call(this, visualization, mappings);
         if (mappings.state) {
@@ -290,6 +298,9 @@
                 break;
             case "CHORO":
                 this.mappings = new ChoroMappings(this.visualization, source.mappings, source.link);
+                break;
+            case "HEAT_MAP":
+                this.mappings = new HeatMapMappings(this.visualization, source.mappings, source.link);
                 break;
             default:
                 this.mappings = new ChartMappings(this.visualization, source.mappings);
@@ -571,6 +582,14 @@
                     ;
                 });
                 break;
+            case "HEAT_MAP":
+                this.loadWidgets(["src/heatmap/SimpleHeat",], function (widget, widgetClasses) {
+                    widget
+                        .id(visualization.id)
+                        .image(context.properties.imageUrl)                        
+                    ;
+                });
+                break;                
             default:
                 this.loadWidget("src/common/TextBox", function (widget) {
                     widget

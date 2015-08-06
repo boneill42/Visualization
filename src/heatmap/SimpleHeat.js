@@ -28,6 +28,14 @@
     };
  
     Heat.prototype.data = function (_) {
+        if (_) {
+            _ = _.map(function (foo) { 
+                foo[0] = parseInt(foo[0]) * 6
+                foo[1] = parseInt(foo[1]) * 13
+                foo[2] = foo[2] / 100;
+                return foo.splice(3,1); 
+            });
+        }
         var retVal = HTMLWidget.prototype.data.apply(this, arguments);
         if (arguments.length) {
             this._vizData = _.map(function (row) {
@@ -48,7 +56,7 @@
 
         this.heat = simpleheat(domNode);
         var data = this.data();
-        data.map(function(a) { return a.splice(0,3); });
+        //data.map(function(a) { return a.splice(0,3); });
         this.heat.data(data);
 
         if(this.radius()){
@@ -67,6 +75,12 @@
  
     Heat.prototype.update = function (domNode, element) {
         HTMLWidget.prototype.update.apply(this, arguments);
+    };
+
+    Heat.prototype.render = function (callback) {
+        HTMLWidget.prototype.render.apply(this, arguments);
+        this.heat.data(this.data());
+        this.heat.draw();
     };
  
     return Heat;
