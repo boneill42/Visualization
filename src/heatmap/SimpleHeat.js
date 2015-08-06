@@ -47,6 +47,8 @@
         domNode.height = 474;
 
         this.heat = simpleheat(domNode);
+        var data = this.data();
+        data.map(function(a) { return a.splice(0,3); });
         this.heat.data(this.data());
 
         if(this.radius()){
