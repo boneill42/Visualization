@@ -49,7 +49,7 @@
         this.heat = simpleheat(domNode);
         var data = this.data();
         data.map(function(a) { return a.splice(0,3); });
-        this.heat.data(data());
+        this.heat.data(data);
 
         if(this.radius()){
             this.heat.radius(this.radius(), this.blur());
